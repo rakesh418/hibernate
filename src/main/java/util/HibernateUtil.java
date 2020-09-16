@@ -15,32 +15,35 @@ public class HibernateUtil {
     private static SessionFactory sessionFactory;
 
     static {
-//        try {
-//            if (sessionFactory == null) {
-//                standardServiceRegistry = new StandardServiceRegistryBuilder().configure().build();
-//                MetadataSources metadataSources = new MetadataSources(standardServiceRegistry);
-//                Metadata metadata = metadataSources.getMetadataBuilder().build();
-//                sessionFactory = metadata.getSessionFactoryBuilder().build();
-//            }
-//        }catch (Exception e){
-//            e.printStackTrace();
-//            if(standardServiceRegistry !=null){
-//                StandardServiceRegistryBuilder.destroy(standardServiceRegistry);
-//            }
-//        }
-        StandardServiceRegistryBuilder registryBuilder = new StandardServiceRegistryBuilder();
-        Map<String,String> dbSettings = new HashMap<String, String>();
-        dbSettings.put(Environment.URL,"jdbc:mysql://localhost:3306/jpa");
-        dbSettings.put(Environment.USER,"lex418");
-        dbSettings.put(Environment.PASS,"lex418");
-        dbSettings.put(Environment.DRIVER,"com.mysql.cj.jdbc.Driver");
-        dbSettings.put(Environment.DIALECT,"org.hibernate.dialect.MySQLDialect");
-
-        registryBuilder.applySettings(dbSettings);
-        standardServiceRegistry=registryBuilder.build();
-        MetadataSources sources = new MetadataSources(standardServiceRegistry);
-        Metadata metadata = sources.getMetadataBuilder().build();
-        sessionFactory=metadata.getSessionFactoryBuilder().build();
+        try {
+            if (sessionFactory == null) {
+                standardServiceRegistry = new StandardServiceRegistryBuilder().configure().build();
+                MetadataSources metadataSources = new MetadataSources(standardServiceRegistry);
+                Metadata metadata = metadataSources.getMetadataBuilder().build();
+                sessionFactory = metadata.getSessionFactoryBuilder().build();
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            if(standardServiceRegistry !=null){
+                StandardServiceRegistryBuilder.destroy(standardServiceRegistry);
+            }
+        }
+//        StandardServiceRegistryBuilder registryBuilder = new StandardServiceRegistryBuilder();
+//        Map<String,String> dbSettings = new HashMap<String, String>();
+//        dbSettings.put(Environment.URL,"jdbc:mysql://localhost:3306/jpa");
+//        dbSettings.put(Environment.USER,"lex418");
+//        dbSettings.put(Environment.PASS,"lex418");
+//        dbSettings.put(Environment.DRIVER,"com.mysql.cj.jdbc.Driver");
+//        dbSettings.put(Environment.DIALECT,"org.hibernate.dialect.MySQL5Dialect");
+//        dbSettings.put(Environment.HBM2DDL_AUTO,"create");
+//        dbSettings.put(Environment.SHOW_SQL,"true");
+//        dbSettings.put(Environment.FORMAT_SQL,"true");
+//
+//        registryBuilder.applySettings(dbSettings);
+//        standardServiceRegistry=registryBuilder.build();
+//        MetadataSources sources = new MetadataSources(standardServiceRegistry);
+//        Metadata metadata = sources.getMetadataBuilder().build();
+//        sessionFactory=metadata.getSessionFactoryBuilder().build();
     }
 
     public static SessionFactory getSessionFactory(){
